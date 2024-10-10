@@ -1,0 +1,41 @@
+---
+- hosts: all
+  gather_facts: yes
+  tasks:
+    - shell: systemctl status qualys-cloud-agent 
+      register: qualys_check
+      ignore_errors: yes
+
+    - debug: var=qualys_check.stdout_lines
+
+    - shell: sh /SE/batch/batch_jobs/sse_snow_scan.sh
+      register: snow_check
+      ignore_errors: yes
+
+    - debug: var=snow_check.stdout_lines
+
+    - shell: id linuxhi@nwcore.seen.co.uk
+      register: linuxhi_check
+      ignore_errors: yes
+
+    - debug: var=linuxhi_check.stdout_lines
+    
+    - shell: /usr/sbin/scxadmin -status
+      register: scom_check
+      ignore_errors: yes
+
+    - debug: var=scom_check.stdout_lines
+
+    - shell: cat /etc/sudoers.d/scorch
+      register: scorch_check
+      ignore_errors: yes
+
+    - debug: var=scorch_check.stdout_lines
+
+    - shell: /usr/openv/netbackup/bin/bpclntcmd -pn
+      register: netbackup_check
+      ignore_errors: yes
+
+    - debug: var=netbackup_check.stdout_lines
+
+    
