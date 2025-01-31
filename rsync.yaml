@@ -1,10 +1,12 @@
 - hosts: all
-  gather_facts: false
+  user: root
+  become: True
   tasks:
-    - ping:
-
-- name: Synchronize two directories on one remote host.
-  copy:
-    src: chrony.conf
-    dest: /etc/chrony.conf
-  delegate_to: "{{ inventory_hostname }}"
+   - name: Rsync datafiles backup
+#     ansible.posix.synchronize:
+     copy:
+        src: chrony.conf
+        dest: /etc/chrony.conf
+     delegate_to: "{{ inventory_hostname }}"
+     register: results_rsync
+#   - debug: msg="{{ results_rsync.stdout_lines }}"
