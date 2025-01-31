@@ -1,0 +1,10 @@
+- hosts: all
+  gather_facts: false
+  tasks:
+    - ping:
+
+- name: Synchronize two directories on one remote host.
+  synchronize:
+    src: /tmp/chrony.conf
+    dest: /etc/chrony.conf
+  delegate_to: "{{ inventory_hostname }}"
