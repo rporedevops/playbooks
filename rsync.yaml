@@ -3,10 +3,8 @@
   become: True
   tasks:
    - name: Rsync datafiles backup
-#     ansible.posix.synchronize:
      copy:
         src: chrony.conf
         dest: /etc/chrony.conf
      delegate_to: "{{ inventory_hostname }}"
      register: results_rsync
-#   - debug: msg="{{ results_rsync.stdout_lines }}"
