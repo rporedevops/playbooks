@@ -4,7 +4,7 @@
     - ping:
 
 - name: Synchronize two directories on one remote host.
-  ansible.posix.synchronize:
+  copy:
     src: chrony.conf
     dest: /etc/chrony.conf
   delegate_to: "{{ inventory_hostname }}"
